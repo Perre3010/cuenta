@@ -9,7 +9,6 @@ export class Cuenta{
         this.saldo = saldo 
         this.num_consig = 0
         this.num_retiros = 0
-        this.saldo = saldo
         this.tasa_anual = tasa_anual
         this.comision_anual = 0
     }
@@ -73,8 +72,8 @@ export class Cuenta{
     }
 
     calcular(){
-    const im = (this.saldo * this.tasa_anual)/12/100
-    this.saldo += im
+    const inter_mens = (this.saldo * this.tasa_anual)/12/100
+    this.saldo += inter_mens
     }
 
     extracto(){

@@ -16,19 +16,30 @@ export class Cuenta_Corriente extends Cuenta{
         this.sobregiro = sobregiro
     }
 
-    consignar(){
-        
+    consignar(valor: number){
+        if(this.sobregiro > 0){
+            if(valor <= this.sobregiro){
+                this.sobregiro -= valor
+            }else{
+                this.saldo += valor - this.sobregiro
+                this.sobregiro = 0
+            }
+        }else{
+            super.consignar(valor)
+        }
     }
 
-    retirar(){
-        
+    retirar(valor: number){
+        this.sobregiro += valor - this.saldo
+        this.saldo = 0
     }
 
     extracto(){
-        
+        super.extracto()
     }
 
     imprimirDatosCorriente(){
-        
+        super.imprimir()
+        console.log("Sobregiro: "+this.sobregiro)
     }
 }

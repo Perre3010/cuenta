@@ -54,24 +54,41 @@ export class Cuenta{
         this.comision_anual = comision_anual
     }
 
-    consignar(){
-
+    consignar(valor: number){
+        if(valor > 0){
+            this.saldo+=valor
+            this.num_consig++
+        }else{
+            console.log("El valor de consignacion debe ser mayor a cero")
+        }
     }
 
-    retirar(){
-
+    retirar(valor: number){
+        if(valor > 0 && valor <= this.saldo){
+            this.saldo -= valor
+            this.num_retiros++
+        }else{
+            console.log("Valor insuficiente")
+        }
     }
 
     calcular(){
-
+    const im = (this.saldo * this.tasa_anual)/12/100
+    this.saldo += im
     }
 
     extracto(){
-
+        this.saldo -= this.comision_anual
+        this.calcular()
+        console.log("Extracto mensual:")
+        this.imprimir()
     }
 
     imprimir(){
-
+        console.log("Saldo: "+this.saldo)
+        console.log("Comision mensual: "+this.comision_anual)
+        console.log("Numero de consignaciones: "+this.num_consig)
+        console.log("Numero de retiros: "+this.num_retiros)
     }
 
 }
